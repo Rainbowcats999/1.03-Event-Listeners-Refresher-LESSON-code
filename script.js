@@ -8,62 +8,21 @@ function render (html) {
 -------------------------------- */
 let clickCount = 0
 
-document.getElementById('btnClick').addEventListener('click', () => {
-  clickCount++
-  render(
-    `<p>You clicked <strong>${clickCount}</strong> time${
-      clickCount === 1 ? '' : 's'
-    }.</p>`
-  )
-})
 
 /* --------------------------------------
    Demo 2: Double-click (toggle highlight)
 --------------------------------------- */
-const dblCard = document.getElementById('dblCard')
 
-dblCard.addEventListener('dblclick', () => {
-  dblCard.classList.toggle('activated')
-  const state = dblCard.classList.contains('activated') ? 'ON' : 'OFF'
-  render(`<p>Double-click highlight is <strong>${state}</strong>.</p>`)
-})
 
 /* --------------------------------
    Demo 3: Keypress (show key/code)
 --------------------------------- */
-const kbKey = document.getElementById('kbKey')
-const kbCode = document.getElementById('kbCode')
 
-document.addEventListener('keydown', e => {
-  kbKey.textContent = e.key === ' ' ? '(space)' : e.key
-  kbCode.textContent = e.code
-})
 
 /* ----------------------------------------
    Demo 4: Show Time (12-hour format + day)
 ----------------------------------------- */
-function timeGreeting (date = new Date()) {
-  const h = date.getHours()
-  if (h < 12) return 'Good morning'
-  if (h < 18) return 'Good afternoon'
-  return 'Good evening'
-}
 
-function formatTime (date = new Date()) {
-  const day = date.toLocaleDateString('en-US', { weekday: 'long' })
-  const time = date.toLocaleTimeString('en-US', {
-    hour: 'numeric',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true
-  })
-  return `${day} ${time}`
-}
-
-document.getElementById('btnTime').addEventListener('click', () => {
-  const now = new Date()
-  render(`<p>${timeGreeting(now)} — <strong>${formatTime(now)}</strong></p>`)
-})
 
 /* -------------------------
    Utility: Clear output

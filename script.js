@@ -75,3 +75,52 @@ hoverCard.addEventListener('mouseleave', () => {
   hoverCard.classList.remove('activated'); // remove highlight
   render('<p>The mouse has left the card.</p>'); // output leave message
 });
+
+/* -------------------------------
+   Event Listener Challenge: Option B
+-------------------------------- */
+
+const scrollBar = document.getElementById('scrollBar');
+
+function updateScrollBar() {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolledPercent = (scrollTop / scrollHeight) * 100;
+  scrollBar.style.width = scrolledPercent + "%";
+}
+
+// Run on page load
+updateScrollBar();
+
+// Update on scroll
+window.addEventListener('scroll', updateScrollBar);
+
+/* -------------------------------
+   Event Listener Challenge: Option C
+-------------------------------- */
+
+const liveInput = document.getElementById('liveInput');
+const neutralMessage = 'Output will appear here…';
+
+// On input
+liveInput.addEventListener('input', () => {
+  const text = liveInput.value.trim();
+  if (text) {
+    render(`<p>Hello, <strong>${text}</strong>!</p>`);
+  } else {
+    render(`<span class="text-secondary">${neutralMessage}</span>`);
+  }
+});
+
+// On focus
+liveInput.addEventListener('focus', () => {
+  liveInput.classList.add('border', 'border-primary', 'shadow-sm');
+});
+
+// On blur
+liveInput.addEventListener('blur', () => {
+  liveInput.classList.remove('border', 'border-primary', 'shadow-sm');
+  if (!liveInput.value.trim()) {
+    render(`<span class="text-secondary">${neutralMessage}</span>`);
+  }
+});

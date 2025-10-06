@@ -85,9 +85,11 @@ const scrollBar = document.getElementById('scrollBar');
 function updateScrollBar() {
   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
   const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  const scrolledPercent = (scrollTop / scrollHeight) * 100;
+  const scrolledPercent = Math.round((scrollTop / scrollHeight) * 100);
   scrollBar.style.width = scrolledPercent + "%";
+  scrollBar.textContent = scrolledPercent + "%"; // show % inside the bar
 }
+
 
 // Run on page load
 updateScrollBar();
